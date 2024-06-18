@@ -9,7 +9,7 @@ def say(command):
     engine.runAndWait()
 
 # Path to the pdf file
-text_book = "C:\\Users\\yaswa\\Downloads\\Meeting Agenda.pdf"
+text_book = "path/to/your/PDFfile"
 
 def extract_text_and_read(path_to_pdf):
     # Extracts data from pdf file
@@ -29,5 +29,5 @@ def extract_text_and_read(path_to_pdf):
         data = page.extract_text()
         print(data)
         say(data)
-        
+
 extract_text_and_read(text_book)
