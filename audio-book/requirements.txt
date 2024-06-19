@@ -1,2 +1,5 @@
 PyPDF2
 pyttsx3
+customtkinter
+tkinter
+threading
