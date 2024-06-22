@@ -18,11 +18,14 @@ class PDFreader():
         self.text = ctk.CTkTextbox(master=self.display, height=260, width=620)
         self.text.pack(fill='both', expand=True)
 
-        self.speak_btn = ctk.CTkButton(self.app, width=78, height=25, text='Read aloud', command=self.start_speaking)
-        self.speak_btn.place(x=281, y=300)
+        self.speak_btn = ctk.CTkButton(self.app, width=78, height=27, text='Read aloud', command=self.start_speaking)
+        self.speak_btn.place(x=425, y=300)
 
         self.upload_button = ctk.CTkButton(self.app, width=78, height=25, text="Browse File", command=self.upload)
         self.upload_button.place(x=281, y=270)
+
+        self.drop_down = ctk.CTkComboBox(self.app, state="readonly", values=["Male", "Female"])
+        self.drop_down.place(x=281, y=300)
         
         self.extracted_text = ""  # Variable to store extracted text
         
@@ -48,6 +51,15 @@ class PDFreader():
     # This is used to start the engine and read the string it is passed 
     def say(self, command):
         engine = tts.init()
+        voices = engine.getProperty('voices')
+        selected_voice = self.drop_down.get()
+        
+        # Select voice based on user choice
+        if selected_voice == "Male":
+            engine.setProperty('voice', voices[0].id)
+        elif selected_voice == "Female":
+            engine.setProperty('voice', voices[1].id)
+
         engine.setProperty('rate', 160)
         engine.say(command)
         engine.runAndWait()
